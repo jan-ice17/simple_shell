@@ -7,5 +7,5 @@
  */
 void prompt(void)
 {
-	printf_("JTEESHELL $ ");
+	print_f("JTEESHELL $ ");
 }

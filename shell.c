@@ -11,8 +11,8 @@ int main(void)
 
 	while (1)
 	{
-		prompt_text(); /* Display the Shell prompt */
-		user_cmd = read_user_input(); /* Read Input from User */
+		prompt(); /* Display the Shell prompt */
+		user_cmd = read_input(); /* Read Input from User */
 
 		if (!user_cmd)
 		{
@@ -23,7 +23,7 @@ int main(void)
 		free(user_cmd);
 	}
 
-	jan_printf("\n"); /*A command line always ends with a new line.*/
+	print_f("\n"); /*A command line always ends with a new line.*/
 	return (0);
 }
 

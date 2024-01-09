@@ -1,24 +1,22 @@
 #include "simple_shell.h"
 
 /**
- * read_user_input - Reads user input from stdin.
+ * read_input - Reads user input from stdin.
  *
  * Return: A pointer to the user input string.
  */
-char *read_user_input(void)
+char *read_input(void)
 {
-    char *user_input = NULL;
-    size_t buf_size = 0;
-    ssize_t get_line;
+	char *user_input = NULL;
+	size_t buff_size = 0;
+	ssize_t read_usr_input;
 
-    get_line = getline(&user_input, &buf_size, stdin);
-
-    if (get_line == -1)
-    {
-        perror(":)");
-        return NULL;
-    }
-
-    return user_input;
+	read_usr_input = getline(&user_input, &buff_size, stdin)
+	if (read_usr_input == -1)
+	{
+		perror(":( ERROR");
+		exit(EXIT_FAILURE);
+	}
+	return (user_input);
 }
 

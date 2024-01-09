@@ -10,18 +10,17 @@
 
 /*All Protyotypes are included in this file*/
 
-
 /*prototype for the display prompt*/
-void prompt_text(void);
+void prompt(void);
 
 /*prototype for my custom printf function*/
-void jan_printf(const char *text);
+void print_f(const char *text);
 
 /*Prototype to execute all commands*/
 void exec_a_command(char *user_cmd);
 
 /*Prototype to read user input*/
-char *read_user_input(void);
+char *read_input(void);
 
 
 

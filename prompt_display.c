@@ -7,5 +7,5 @@
  */
 void display_prompt(void)
 {
-	JanTee_printf("JANTIK $ ");
+	JanTee_printf("JANTIK$ ");
 }

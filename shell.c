@@ -11,7 +11,7 @@ int main(void)
 
 	while (1)
 	{
-		void display_prompt(void)(); /* Display the Shell prompt */
+		display_prompt(); /* Display the Shell prompt */
 		command_args = read_input(); /* Read Input from User */
 
 		if (!command_args)

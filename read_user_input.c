@@ -18,7 +18,7 @@ char **read_input(void)
 		perror(":( ERROR");
 		exit(EXIT_FAILURE);
 	}
-	tokenized_input = tokenize_input(user_input);
+	char **tokenized_input = tokenize_input(user_input);
 	free(user_input);
 
 	return (tokenized_input);

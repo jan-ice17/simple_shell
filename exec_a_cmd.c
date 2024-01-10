@@ -1,7 +1,8 @@
 #include "simple_shell.h"
 
-/*
- *execute_cmd - Fuction that execute user cmds
+/**
+ * execute_cmd - Fuction that execute user cmds
+ * @command_args: formal parameter
  *
  * Return: 1
  */
@@ -9,8 +10,8 @@ int execute_cmd(char *command_args[])
 {
 	pid_t process_id;
 	int pid_status;
-	process_id = fork();
 
+	process_id = fork();
 	if (process_id == 0) /* Child Process Running */
 	{
 		char *envp[] = {NULL}; /* Set a dummy envp 4 now */

@@ -1,11 +1,11 @@
 #include "simple_shell.h"
 
 /**
- * prompt_text - Displays a prompt and waits for the user to type a command.
+ * prompt - dispalys prompt
  *
- * Return: Nothing.
+ * return: empty
  */
-void prompt_text(void)
+void display_prompt(void)
 {
-	jan_printf("JANSHELL $ ");
+	JanTee_printf("JANTIK $");
 }

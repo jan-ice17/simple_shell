@@ -12,10 +12,10 @@
 
 
 /*prototype for the display prompt*/
-void prompt_text(void);
+void display_prompt(void);
 
 /*prototype for my custom printf function*/
-void jan_printf(const char *text);
+int JanTee_printf(char c);
 
 /*Prototype to execute all commands*/
 void exec_a_command(char *user_cmd);

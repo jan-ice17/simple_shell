@@ -15,7 +15,7 @@
 void display_prompt(void);
 
 /*prototype for my custom printf function*/
-int JanTee_printf(char c);
+int JanTee_printf(const char *str);
 
 /*Prototype to execute all commands*/
 int execute_cmd(char *command_args[]);

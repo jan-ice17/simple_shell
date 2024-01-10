@@ -3,12 +3,16 @@
 
 /**
  * JanTee_printf - prints to stdout
- * @c: takes in characters
- * print_f - A custom printfhat writes text to STDOUT_FILENO.
+ * @string: takes in characters
  *
  * return: write statement
  */
-int JanTee_printf(char c)
+int JanTee_printf(const char *string)
 {
-	return (write(1, &c, 1));
+	if (string == NULL)
+	{
+		return (-1);
+	}
+	size_t len = strlen(string);
+	return (write(1, &string, len));
 }

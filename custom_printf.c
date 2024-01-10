@@ -4,6 +4,7 @@
 /**
  * JanTee_printf - prints to stdout
  * @c: takes in characters
+ * print_f - A custom printfhat writes text to STDOUT_FILENO.
  *
  * return: write statement
  */

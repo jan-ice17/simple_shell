@@ -7,9 +7,9 @@
 #include <stdlib.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+#define BUFFER_SIZE 1024  /*buff size*/
 
 /*All Protyotypes are included in this file*/
-
 
 /*prototype for the display prompt*/
 void display_prompt(void);
@@ -18,12 +18,12 @@ void display_prompt(void);
 int JanTee_printf(char c);
 
 /*Prototype to execute all commands*/
-void exec_a_command(char *user_cmd);
+int execute_cmd(char *command_args[]);
 
 /*Prototype to read user input*/
-char *read_user_input(void);
+char **read_input(void);
 
-
-
+/*Prototype for parsing user input into args*/
+char **tokenize_input(char *input_line);
 
 #endif /*SIMPLE_SHELL_H*/

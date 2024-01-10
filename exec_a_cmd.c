@@ -1,37 +1,44 @@
 #include "simple_shell.h"
 
-void exec_a_command(char *user_cmd)
+/*
+ *execute_cmd - Fuction that execute user cmds
+ *
+ * Return: 1
+ */
+int execute_cmd(char *command_args[])
 {
-    pid_t my_pid = fork();
+	pid_t process_id;
+	int pid_status;
+	process_id = fork();
 
-    if (my_pid == -1)
-    {
-        perror(":( Fork Failed ");
-        exit(EXIT_FAILURE);
-    }
+	if (process_id == 0) /* Child Process Running */
+	{
+		char *envp[] = {NULL}; /* Set a dummy envp 4 now */
 
-    if (my_pid == 0) /* Child Process */
-    {
-        char **args = malloc(sizeof(char *) * 2);
-        if (args == NULL)
-        {
-            perror(":( Memory Allocation Failed");
-            exit(EXIT_FAILURE);
-        }
-
-        args[0] = user_cmd;
-        args[1] = NULL;
-
-        execvp(args[0], args);
-
-        /* If execvp fails, print an error message */
-        perror(":( Execvp Failed");
-        exit(EXIT_FAILURE);
-    }
-    else
-    {
-        /* Parent process */
-        wait(NULL);
-    }
+		if (execve(command_args[0], command_args, envp) == -1)
+		{
+			perror(":( Execve Failed");
+		}
+		exit(EXIT_FAILURE);
+	}
+	else if (process_id < 0)
+	{
+		perror(":( Fork Failed");
+	}
+	else
+	{
+		/* Parent Process Is Running */
+		wait(&pid_status); /* Wait 4 child_pid to complete */
+		if (WIFEXITED(pid_status) || WIFSIGNALED(pid_status))
+		{
+			return (0); /* Return 0 for successful execution */
+		}
+		else
+		{
+			perror(":( Child_process error");
+			return (-1); /* Return -1 to indicate an error */
+		}
+	}
+	return (1); /* continue to execution */
 }
 

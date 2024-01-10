@@ -7,22 +7,21 @@
  */
 int main(void)
 {
-	char *user_cmd;
+	char **command_args;
 
 	while (1)
 	{
 		void display_prompt(void)(); /* Display the Shell prompt */
-		user_cmd = read_user_input(); /* Read Input from User */
+		command_args = read_input(); /* Read Input from User */
 
-		if (!user_cmd)
+		if (!command_args)
 		{
 			break; /* Break the loop on EOF (Ctrl+D) */
 		}
 
-		exec_a_command(user_cmd); /* Execute the user's command */
-		free(user_cmd);
+		execute_cmd(command_args); /* Execute the user's command */
+		free(command_args);
 	}
-
 	JanTee_printf("\n"); /*A command line always ends with a new line.*/
 	return (0);
 }

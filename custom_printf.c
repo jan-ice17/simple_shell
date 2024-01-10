@@ -9,7 +9,7 @@
  */
 int JanTee_printf(const char *string)
 {
-	size_t len;
+	size_t len;/*Variable for length*/
 
 	if (string == NULL)
 	{

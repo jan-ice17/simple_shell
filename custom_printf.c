@@ -14,5 +14,5 @@ int JanTee_printf(const char *string)
 		return (-1);
 	}
 	size_t len = strlen(string);
-	return (write(1, &string, len));
+	return (write(1, string, len));
 }

@@ -1,7 +1,7 @@
 #include "simple_shell.h"
 
 /**
- * *read_user_input - Reads user input from stdin.
+ * read_input - Reads user input from stdin.
  * read
  *
  * Return: A pointer to the user input string.
@@ -19,7 +19,7 @@ char **read_input(void)
 		exit(EXIT_FAILURE);
 	}
 	char **tokenized_input = tokenize_input(user_input);
-	free(user_input);
 
+	free(user_input);
 	return (tokenized_input);
 }

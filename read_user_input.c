@@ -11,6 +11,7 @@ char **read_input(void)
 	char *user_input = NULL;
 	size_t buf_size = 0;
 	ssize_t get_line;
+	char **tokenized_input;
 
 	get_line = getline(&user_input, &buf_size, stdin);
 	if (get_line == -1)
@@ -18,7 +19,8 @@ char **read_input(void)
 		perror(":( ERROR");
 		exit(EXIT_FAILURE);
 	}
-	char **tokenized_input = tokenize_input(user_input);
+
+	tokenized_input = tokenize_input(user_input);
 
 	free(user_input);
 	return (tokenized_input);

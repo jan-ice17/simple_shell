@@ -9,11 +9,13 @@
  */
 int JanTee_printf(const char *string)
 {
+	size_t len;
+
 	if (string == NULL)
 	{
 		return (-1);
 	}
-	size_t len = strlen(string);
+	len = strlen(string);
 
 	return (write(1, string, len));
 }

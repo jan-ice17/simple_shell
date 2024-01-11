@@ -17,7 +17,7 @@ char *jan_read_input(void);
 void jan_display_prompt(void);
 void jan_exec_command(char **args);
 void free_mem(char **args);
-char **parse_input(char* input);
+char **parse_input(char *input);
 extern char *progr_name;
 
 #endif /* JANTEE_SHELL_H */

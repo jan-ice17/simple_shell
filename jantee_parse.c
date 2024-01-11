@@ -6,33 +6,33 @@
  *
  * Return: An array of pointers to the parsed arguments.
  */
-char **parse_input(char* input)
+char **parse_input(char *input)
 {
-    int i;
-    char *token;
-    char **args = malloc(MAX_ARGS * sizeof(char *));
+	char *token;
+	int i;
+	char **args = malloc(MAX_ARGS * sizeof(char *));
 
-    if (args == NULL)
-    {
-        perror(progr_name);
-        exit(EXIT_FAILURE);
-    }
+	if (args == NULL)
+	{
+		perror(progr_name);
+		exit(EXIT_FAILURE);
+	}
 
-    token = strtok(input, " ");
-    i = 0;
+	token = strtok(input, " ");
+	i = 0;
 
-    while (token != NULL && i < MAX_ARGS - 1)
-    {
-        args[i++] = strdup(token);
-        if (args[i - 1] == NULL)
-        {
-            perror(progr_name);
-            exit(EXIT_FAILURE);
-        }
+	while (token != NULL && i < MAX_ARGS - 1)
+	{
+		args[i++] = strdup(token);
+		if (args[i - 1] == NULL)
+		{
+			perror(progr_name);
+			exit(EXIT_FAILURE);
+		}
 
-        token = strtok(NULL, " ");
-    }
-    
-    args[i] = NULL;
-    return args;
+		token = strtok(NULL, " ");
+	}
+
+	args[i] = NULL;
+	return (args);
 }

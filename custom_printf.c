@@ -19,3 +19,4 @@ int JanTee_printf(const char *string)
 
 	return (write(1, string, len));
 }
+

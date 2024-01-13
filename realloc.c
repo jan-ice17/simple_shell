@@ -13,11 +13,17 @@ void *_realloc(void *ptr, size_t size) {
     void *new_ptr = malloc(size);
 
     
-    if (!ptr || !size) {
-        /* If pointer is NULL or size is zero, be like malloc */
+    if (!ptr) {
+        /* If pointer is NULL, be like malloc */
         return malloc(size);
     }
 
+    if (!size) {
+        /* If size is zero, free the memory and return NULL */
+        free(ptr);
+        return NULL;
+    }
+    
     if (head->size >= size) {
         /* If existing block is large enough, return original pointer */
         return ptr;

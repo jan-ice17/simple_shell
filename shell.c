@@ -21,6 +21,12 @@ int main(int argc, char **argv) {
         if (argc)
         {}
         
+        char **ptr = args;
+        while (*ptr) {
+            free(*ptr);
+            ptr++;
+        }
+        
         free(args);
         free(cmd);
     }

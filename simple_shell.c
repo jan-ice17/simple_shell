@@ -1,27 +1,41 @@
-#include "simple_shell.h"
+#include "jantee_shell.h"
+
+char *progr_name;
 
 /**
- * main - Shell program that runs shell commands.
+ * main - Entry point for the shell program.
+ *
+ * @argc: The number of command line arguments.
+ * @argv: An array of strings containing the command line arguments.
  *
  * Return: Always 0.
  */
-int main(void)
+int main(int argc, char *argv[])
 {
-	char **command_args;
-
-	while (1)
+	char *input;
+	char **args;
+    
+    progr_name = argv[0];
+    while (1)
 	{
-		display_prompt(); /* Display the Shell prompt */
-		command_args = read_input(); /* Read Input from User */
+		input = jan_read_input();
 
-		if (!command_args)
+		if (input == NULL)
 		{
-			break; /* Break the loop on EOF (Ctrl+D) */
+			argc = 1;
+			write(STDOUT_FILENO, "\n", argc);
+			break;
 		}
 
-		execute_cmd(command_args); /* Execute the user's command */
-		free(command_args);
+		args = parse_input(input);
+		if (args[0] != NULL)
+		{
+			jan_exec_command(args);
+		}
+
+		free_mem(args);
+		free(input);
 	}
-	JanTee_printf("\n"); /*A command line always ends with a new line.*/
+
 	return (0);
 }

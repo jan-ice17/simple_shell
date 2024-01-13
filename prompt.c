@@ -1,11 +1,51 @@
-#include "simple_shell.h"
+#include "jantee_shell.h"
 
 /**
- * display_prompt -Displays a prompt and waits for the user to type a command.
+ * jan_display_prompt - Display the shell prompt
  *
- * return: empty
+ * Description: Displays the prompt "JANTEE/$ ".
+ *
+ * Return: void
  */
-void display_prompt(void)
+void jan_display_prompt(void)
 {
-	JanTee_printf("JANTIK$ ");
+	write(STDOUT_FILENO, "JANTEE/$ ", 9);
+}
+
+/**
+ * jan_read_input - Read input from the user
+ *
+ * Description: Reads input from the user using getline.
+ *
+ * Return: A pointer to the input string, or NULL on failure.
+ */
+char *jan_read_input(void)
+{
+	char *input = NULL;
+	ssize_t read_bytes;
+	size_t len = 0;
+
+	jan_display_prompt();
+	read_bytes = getline(&input, &len, stdin);
+
+	if (read_bytes == -1)
+	{
+		if (feof(stdin))
+		{
+			free(input);
+			return (NULL);
+		}
+		else
+		{
+			perror(progr_name);
+			exit(EXIT_FAILURE);
+		}
+	}
+
+	if (input[read_bytes - 1] == '\n')
+	{
+		input[read_bytes - 1] = '\0';
+	}
+
+	return (input);
 }

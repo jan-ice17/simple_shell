@@ -12,6 +12,7 @@ int main(int argc, char **argv) {
     while (1) {
         char *cmd;
         char **args;
+        char **ptr;
 
         display_prompt(); 
         cmd = read_command(); 
@@ -21,7 +22,7 @@ int main(int argc, char **argv) {
         if (argc)
         {}
         
-        char **ptr = args;
+        ptr = args;
         while (*ptr) {
             free(*ptr);
             ptr++;

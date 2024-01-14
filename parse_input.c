@@ -41,7 +41,7 @@ char *read_command() {
     char *comm = NULL;
     size_t buf_size = 0;
 
-    if (_getline(&comm, &buf_size, 0) == 0) {
+    if (getline(&comm, &buf_size, stdin) == 1) {
         /*Handling eof (Ctrl+D)*/ 
         if (isatty(STDIN_FILENO)) {
             _printf("\n");

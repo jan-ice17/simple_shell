@@ -24,7 +24,7 @@ void *_realloc(void *ptr, size_t size) {
 
     head = (header_t *)ptr - 1;
 
-    if (head->size >= size) {
+    if (head->size + sizeof(header_t) >= size) {
         /* If existing block is large enough, return original pointer */
         return ptr;
     }

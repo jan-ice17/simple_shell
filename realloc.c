@@ -8,35 +8,37 @@
  * @return Pointer to the reallocated memory block, or NULL if the allocation fails.
  */
 void *_realloc(void *ptr, size_t size) {
-    header_t *head = (header_t *)ptr - 1;
-    size_t i;
-    void *new_ptr = malloc(size);
+    header_t *head;
+    header_t *new_ptr;
 
-    
     if (!ptr) {
         /* If pointer is NULL, be like malloc */
-        return malloc(size);
+        new_ptr = malloc(size + sizeof(header_t));
+        if (new_ptr) {
+            new_ptr->size = size;
+            return new_ptr + 1;
+        } else {
+            return NULL;
+        }
     }
 
-    if (!size) {
-        /* If size is zero, free the memory and return NULL */
-        free(ptr);
-        return NULL;
-    }
-    
+    head = (header_t *)ptr - 1;
+
     if (head->size >= size) {
         /* If existing block is large enough, return original pointer */
         return ptr;
     }
 
+    /* Allocate new block with extra space for header */
+    new_ptr = malloc(size + sizeof(header_t));
     if (new_ptr) {
         /* Copy contents to new block and free the old block */
         size_t copy_size = (head->size < size) ? head->size : size;
-        for (i = 0; i < copy_size; i++) {
-            ((char *)new_ptr)[i] = ((char *)ptr)[i];
-        }
-        free(ptr);
+        memcpy(new_ptr + 1, ptr, copy_size);
+        free(head);
+        new_ptr->size = size;
+        return new_ptr + 1;
+    } else {
+        return NULL;
     }
-
-    return new_ptr;
 }

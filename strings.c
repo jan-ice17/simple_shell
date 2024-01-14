@@ -82,3 +82,27 @@ void _strcpy(char *dest, char *src) {
     }
     dest[i] = '\0';
 }
+
+
+/**
+ * Compares at most the first n characters of two strings s1 and s2.
+ * 
+ * @s1 : The first string to be compared.
+ * @s2 : The second string to be compared.
+ * @n : The maximum number of characters to compare.
+ * 
+ * @return An integer less than, equal to, or greater than zero if the first n characters of s1 are found.
+ */
+int _strncmp(const char *s1, const char *s2, size_t n) {
+    while (n--) {
+        if (*s1 != *s2) {
+            return *(unsigned char *)s1 - *(unsigned char *)s2;
+        }
+        if (*s1 == '\0') {
+            return 0;
+        }
+        s1++;
+        s2++;
+    }
+    return 0;
+}

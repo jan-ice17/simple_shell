@@ -15,7 +15,7 @@ void _execute(const char *file_path, char **const args, const char *program_name
         return;
     }
 
-    if (file_path[0] != '/') {
+    if (file_path[0] != '/' && _strncmp(file_path, "./", 2) != 0) {
         char *path_env = getenv("PATH");
         char *path_copy = _strdup(path_env);
         char *token = _strtok(path_copy, ":");

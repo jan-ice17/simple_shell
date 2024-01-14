@@ -25,6 +25,7 @@ char *_strchr(const char *s, char c);
 char *_strdup(const char *s);
 void _strcat(char *dest, const char *src);
 void _strcpy(char *dest, char *src);
+int _strncmp(const char *s1, const char *s2, size_t n);
 char *read_command();
 char **split_string(char *command);
 void _printf(const char *str);

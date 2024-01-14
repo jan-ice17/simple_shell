@@ -11,6 +11,9 @@
 void _execute(const char *file_path, char **const args, const char *program_name) {
     pid_t jantee_pid;
     char *full_path = NULL;
+    if (file_path == NULL) {
+        return;
+    }
 
     if (file_path[0] != '/') {
         char *path_env = getenv("PATH");
@@ -39,7 +42,7 @@ void _execute(const char *file_path, char **const args, const char *program_name
         }
 
         file_path = full_path;
-    } else if (access(file_path, X_OK) == -1) {
+    } else if (access(file_path, X_OK) == -1) { /*Check if the file path exists*/
         perror(program_name);
         return;
     }

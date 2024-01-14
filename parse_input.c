@@ -1,7 +1,7 @@
 #include "shell.h"
 
 /**
- * Display prompt "(JANTEE)$ " if input coming from terminal.
+ * Display the shell prompt.
  */
 void display_prompt() {
     if (isatty(STDIN_FILENO)) {
@@ -11,44 +11,53 @@ void display_prompt() {
 }
 
 /**
- * Split string into array of tokens.
- *
- * @command: The string to be split.
+ * Split the command into tokens.
+ * @param command: The string to be split.
  * @return An array of tokens.
  */
 char **split_string(char *command) {
-    char **args = malloc(64 * sizeof(char *));
-    char *my_tok;
-    int i = 0;
+    int bufsize = 64, position = 0;
+    char **tokens = malloc(bufsize * sizeof(char*));
+    char *token;
 
-    my_tok = _strtok(command, " \n");
-    while (my_tok != NULL) {
-        args[i] = my_tok;
-        i++;
-        my_tok = _strtok(NULL, " \n");
+    if (!tokens) {
+        _printf("Allocation error\n");
+        exit(EXIT_FAILURE);
     }
-    args[i] = NULL;
 
-    return args;
+    token = _strtok(command, " \n");
+    while (token != NULL) {
+        tokens[position] = token;
+        position++;
+
+        if (position >= bufsize) {
+            bufsize += 64;
+            tokens = realloc(tokens, bufsize * sizeof(char*));
+            if (!tokens) {
+                _printf("Allocation error\n");
+                exit(EXIT_FAILURE);
+            }
+        }
+
+        token = _strtok(NULL, " \n");
+    }
+    tokens[position] = NULL;
+    return tokens;
 }
 
 /**
- * Read command from user.
- * 
- * @return Command entered by the user.
+ * Read a command from the user.
+ * @return The command read from the user.
  */
 char *read_command() {
-    char *comm = NULL;
-    size_t buf_size = 0;
-
-    if (getline(&comm, &buf_size, stdin) == 1) {
-        /*Handling eof (Ctrl+D)*/ 
+    char *line = NULL;
+    size_t bufsize = 0;
+    if (getline(&line, &bufsize, stdin) == -1) {
         if (isatty(STDIN_FILENO)) {
             _printf("\n");
         }
-        free(comm);
+        free(line);
         exit(EXIT_SUCCESS);
     }
-
-    return comm;
+    return line;
 }

@@ -52,7 +52,7 @@ char **split_string(char *command) {
 char *read_command() {
     char *line = NULL;
     size_t bufsize = 0;
-    if (getline(&line, &bufsize, stdin) == -1) {
+    if (_getline(&line, &bufsize, 0) == -1) {
         if (isatty(STDIN_FILENO)) {
             _printf("\n");
         }

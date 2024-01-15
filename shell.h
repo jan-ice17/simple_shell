@@ -32,5 +32,6 @@ char **split_string(char *command);
 void _printf(const char *str);
 void display_prompt();
 void _execute(const char *file_path, char **const args, const char *program_name);
+ssize_t _getline(char **lineptr, size_t *n, int fd);
 
 #endif /*SHELL_H*/

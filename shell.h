@@ -26,6 +26,7 @@ void _strcat(char *dest, const char *src);
 void _strcpy(char *dest, char *src);
 void *_realloc(void *old_ptr, size_t new_size);
 int _strncmp(const char *s1, const char *s2, size_t n);
+int _strcmp(const char *str1, const char *str2);
 char *read_command();
 char **split_string(char *command);
 void _printf(const char *str);

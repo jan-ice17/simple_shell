@@ -106,3 +106,21 @@ int _strncmp(const char *s1, const char *s2, size_t n) {
     }
     return 0;
 }
+
+
+/**
+ * Compares two strings lexicographically.
+ *
+ *
+ * @param str1 The first string to compare.
+ * @param str2 The second string.
+ * @return An integer less than, equal to, or greater than zero if str1 is found
+ *         to be less than, equal to, or greater than str2, respectively.
+ */
+int _strcmp(const char *str1, const char *str2) {
+    while (*str1 && (*str1 == *str2)) {
+        str1++;
+        str2++;
+    }
+    return *(unsigned char *)str1 - *(unsigned char *)str2;
+}

@@ -24,7 +24,7 @@ ssize_t _getline(char **lineptr, size_t *n, int fd) {
         p = jan_buf;
     }
 
-    line = malloc(size);
+    line = malloc(size + 1);
     if (line == NULL) {
         return -1;
     }

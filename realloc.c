@@ -1,44 +1,46 @@
-#include "shell.h"
+#include <stdlib.h>
 
 /**
- * Reallocates a memory block with a new size.
+ * _realloc - Reallocates a memory block using malloc and free.
+ * @old_ptr: A pointer to the memory previously allocated.
+ * @new_size: The new size of the allocated memory.
  * 
- * @ptr:   Pointer to the memory block to be reallocated.
- * @size:  New size of the memory block.
- * @return Pointer to the reallocated memory block, or NULL if the allocation fails.
+ * Return: A pointer to the newly allocated memory, or NULL if an error occurred.
  */
-void *_realloc(void *ptr, size_t size) {
-    header_t *head;
-    header_t *new_ptr;
+void *_realloc(void *old_ptr, size_t new_size) {
+    void *new_ptr = NULL;
+    size_t *old_size_ptr = NULL;
+    size_t old_size = 0;
+    size_t min_size = 0;
+    char *old_char_ptr = NULL;
+    char *new_char_ptr = NULL;
+    size_t i = 0;
 
-    if (!ptr) {
-        /* If pointer is NULL, be like malloc */
-        new_ptr = malloc(size + sizeof(header_t));
-        if (new_ptr) {
-            new_ptr->size = size;
-            return new_ptr + 1;
-        } else {
-            return NULL;
-        }
-    }
-
-    head = (header_t *)ptr - 1;
-
-    if (head->size + sizeof(header_t) >= size) {
-        /* If existing block is large enough, return original pointer */
-        return ptr;
-    }
-
-    /* Allocate new block with extra space for header */
-    new_ptr = malloc(size + sizeof(header_t));
-    if (new_ptr) {
-        /* Copy contents to new block and free the old block */
-        size_t copy_size = (head->size < size) ? head->size : size;
-        memcpy(new_ptr + 1, ptr, copy_size);
-        free(head);
-        new_ptr->size = size;
-        return new_ptr + 1;
-    } else {
+    if (new_size == 0) {
+        free(old_ptr);
         return NULL;
     }
+
+    if (old_ptr == NULL) {
+        return malloc(new_size);
+    }
+
+    new_ptr = malloc(new_size);
+    if (new_ptr == NULL) {
+        return NULL;
+    }
+
+    old_size_ptr = (size_t*)old_ptr - 1;
+    old_size = *old_size_ptr;
+    min_size = old_size < new_size ? old_size : new_size;
+
+    old_char_ptr = (char*)old_ptr;
+    new_char_ptr = (char*)new_ptr;
+
+    for (i = 0; i < min_size; i++) {
+        new_char_ptr[i] = old_char_ptr[i];
+    }
+
+    free(old_ptr);
+    return new_ptr;
 }

@@ -32,7 +32,7 @@ char **split_string(char *command) {
 
         if (position >= bufsize) {
             bufsize += 64;
-            tokens = realloc(tokens, bufsize * sizeof(char*));
+            tokens = _realloc(tokens, bufsize * sizeof(char*));
             if (!tokens) {
                 _printf("Allocation error\n");
                 exit(EXIT_FAILURE);

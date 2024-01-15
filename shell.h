@@ -12,6 +12,7 @@
 #include <stdint.h>
 #include <stdbool.h>
 #include <sys/wait.h>  
+#include <ctype.h>
 
 
 #define BUFFER_SIZE 1024
@@ -19,6 +20,7 @@
 size_t _strspn(const char *str, const char *accept);
 size_t _strcspn(const char *str, const char *reject);
 size_t _strlen(const char *str);
+int _atoi(const char *str); 
 char *_strtok(char *str, const char *delim);
 char *_strchr(const char *s, char c);
 char *_strdup(const char *s);

@@ -13,7 +13,7 @@ char *get_full_path(const char *file_path) {
     char *token = _strtok(path_copy, ":");
     char *full_path = NULL;
 
-    while (token != NULL && full_path == NULL) {
+    while (token != NULL) {
         full_path = malloc(_strlen(token) + _strlen(file_path) + 2);
         _strcpy(full_path, token);
         _strcat(full_path, "/");
@@ -22,6 +22,8 @@ char *get_full_path(const char *file_path) {
         if (access(full_path, X_OK) == -1) {
             free(full_path);
             full_path = NULL;
+        } else {
+            break;
         }
 
         token = _strtok(NULL, ":");
@@ -76,6 +78,17 @@ void _execute(const char *file_path, char **const args, const char *program_name
     if (_strcmp(file_path, "exit") == 0) {
         int status = EXIT_SUCCESS;
         if (args[1] != NULL) {
+            char *arg = args[1];
+            if (*arg == '-' || *arg == '+') {
+                arg++;
+            }
+            for (; *arg != '\0'; arg++) {
+                if (!isdigit(*arg)) {
+                    _printf(program_name);
+                    _printf(args[1]);
+                    exit(2);
+                }
+            }
             status = _atoi(args[1]);
         }
         exit(status);

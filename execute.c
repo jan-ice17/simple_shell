@@ -41,6 +41,7 @@ char *get_full_path(const char *file_path) {
  */
 void execute_file(const char *file_path, char **const args, const char *program_name) {
     pid_t jantee_pid = fork();
+    int status;
 
     if (jantee_pid == -1) {
         perror(program_name);
@@ -53,7 +54,13 @@ void execute_file(const char *file_path, char **const args, const char *program_
             exit(EXIT_FAILURE);
         }
     } else {
-        waitpid(jantee_pid, NULL, 0);
+        waitpid(jantee_pid, &status, 0);
+        if (WIFEXITED(status)) {
+            int exit_status = WEXITSTATUS(status);
+            if (exit_status != 0) {
+                exit(exit_status);
+            }
+        }
     }
 }
 

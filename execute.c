@@ -74,7 +74,11 @@ void _execute(const char *file_path, char **const args, const char *program_name
     }
     
     if (_strcmp(file_path, "exit") == 0) {
-        exit(EXIT_SUCCESS);
+        int status = EXIT_SUCCESS;
+        if (args[1] != NULL) {
+            status = atoi(args[1]);
+        }
+        exit(status);
     }
 
     if (_strcmp(file_path, "env") == 0) {

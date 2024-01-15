@@ -76,7 +76,7 @@ void _execute(const char *file_path, char **const args, const char *program_name
     if (_strcmp(file_path, "exit") == 0) {
         int status = EXIT_SUCCESS;
         if (args[1] != NULL) {
-            status = atoi(args[1]);
+            status = _atoi(args[1]);
         }
         exit(status);
     }

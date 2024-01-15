@@ -74,6 +74,7 @@ void _execute(const char *file_path, char **const args, const char *program_name
     }
     
     if (_strcmp(file_path, "exit") == 0) {
+        free(full_path); 
         exit(EXIT_SUCCESS);
     }
 
